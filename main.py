@@ -1,85 +1,29 @@
 from pygame import *
 
-def drawX(md, square):
-    if square == 1:
-        draw.line(md, (0, 200, 64), [10, 10], [190, 190], 9)
-        draw.line(md, (0, 200, 64), [190, 10], [10, 190], 9)
-        display.update()
-    elif square == 2:
-        draw.line(md, (0, 200, 64), [210, 10], [390, 190], 9)
-        draw.line(md, (0, 200, 64), [390, 10], [210, 190], 9)
-        display.update()
-    elif square == 3:
-        draw.line(md, (0, 200, 64), [410, 10], [590, 190], 9)
-        draw.line(md, (0, 200, 64), [590, 10], [410, 190], 9)
-        display.update()
-    elif square == 4:
-        draw.line(md, (0, 200, 64), [10, 210], [190, 390], 9)
-        draw.line(md, (0, 200, 64), [190, 210], [10, 390], 9)
-        display.update()
-    elif square == 5:
-        draw.line(md, (0, 200, 64), [210, 210], [390, 390], 9)
-        draw.line(md, (0, 200, 64), [390, 210], [210, 390], 9)
-        display.update()
-    elif square == 6:
-        draw.line(md, (0, 200, 64), [410, 210], [590, 390], 9)
-        draw.line(md, (0, 200, 64), [590, 210], [410, 390], 9)
-        display.update()
-    if square == 7:
-        draw.line(md, (0, 200, 64), [10, 410], [190, 590], 9)
-        draw.line(md, (0, 200, 64), [190, 410], [10, 590], 9)
-        display.update()
-    if square == 8:
-        draw.line(md, (0, 200, 64), [210, 410], [390, 590], 9)
-        draw.line(md, (0, 200, 64), [390, 410], [210, 590], 9)
-        display.update()
-    if square == 9:
-        draw.line(md, (0, 200, 64), [410, 410], [590, 590], 9)
-        draw.line(md, (0, 200, 64), [590, 410], [410, 590], 9)
-        display.update()
-
-def drawY(md, square):
-    if square == 1:
-        draw.circle(md, (64, 128, 255), (100, 100), 90, 8)
-        display.update()
-    elif square == 2:
-        draw.circle(md, (64, 128, 255), (300, 100), 90, 8)
-        display.update()
-    elif square == 3:
-        draw.circle(md, (64, 128, 255), (500, 100), 90, 8)
-        display.update()
-    elif square == 4:
-        draw.circle(md, (64, 128, 255), (100, 300), 90, 8)
-        display.update()
-    elif square == 5:
-        draw.circle(md, (64, 128, 255), (300, 300), 90, 8)
-        display.update()
-    elif square == 6:
-        draw.circle(md, (64, 128, 255), (500, 300), 90, 8)
-        display.update()
-    elif square == 7:
-        draw.circle(md, (64, 128, 255), (100, 500), 90, 8)
-        display.update()
-    elif square == 8:
-        draw.circle(md, (64, 128, 255), (300, 500), 90, 8)
-        display.update()
-    elif square == 9:
-        draw.circle(md, (64, 128, 255), (500, 500), 90, 8)
-        display.update()
 def main():
     init()
 
-    fps = 60
+    fps = 30
     clock = time.Clock()
 
     main_display = display.set_mode((600, 600))
     main_display.fill((255,255,255))
     display.set_caption('X - O')
-    draw.line(main_display, (0, 0, 0), [0, 200], [600, 200], 10)
-    draw.line(main_display, (0, 0, 0), [0, 400], [600, 400], 10)
-    draw.line(main_display, (0, 0, 0), [200, 0], [200, 600], 10)
-    draw.line(main_display, (0, 0, 0), [400, 0], [400, 600], 10)
-    
+    draw.line(main_display, (0, 0, 0), [0, 200], [600, 200], 9)
+    draw.line(main_display, (0, 0, 0), [0, 400], [600, 400], 9)
+    draw.line(main_display, (0, 0, 0), [200, 0], [200, 600], 9)
+    draw.line(main_display, (0, 0, 0), [400, 0], [400, 600], 9)
+    square1 = Rect(5, 5, 190, 190)
+    square2 = Rect(205, 5 , 190, 190)
+    square3 = Rect(405, 5, 190, 190)
+    square4 = Rect(5, 205, 190, 190)
+    square5 = Rect(205, 205, 190, 190)
+    square6 = Rect(405, 205, 190, 190)
+    square7 = Rect(5, 405, 190, 190)
+    square8 = Rect(205, 405, 190, 190)
+    square9 = Rect(405, 405, 190, 190)
+    draw_x = image.load("image/x.bmp")
+    draw_o = image.load("image/o.bmp")
     display.update()
     
     queue = 'x'
@@ -93,66 +37,84 @@ def main():
                 if i.pos[0] >= 0 and i.pos[0] <= 200 and i.pos[1] >= 0 and i.pos[1] <= 200:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 1)
+                        main_display.blit(draw_x, square1)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 1)
+                        main_display.blit(draw_o, square1)
+                        display.update()
                 elif i.pos[0] >= 200 and i.pos[0] <= 400 and i.pos[1] >= 0 and i.pos[1] <= 200:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 2)
+                        main_display.blit(draw_x, square2)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 2)
+                        main_display.blit(draw_o, square2)
+                        display.update()
                 elif i.pos[0] >= 400 and i.pos[0] <= 600 and i.pos[1] >= 0 and i.pos[1] <= 200:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 3)
+                        main_display.blit(draw_x, square3)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 3)
+                        main_display.blit(draw_o, square3)
+                        display.update()
                 elif i.pos[0] >= 0 and i.pos[0] <= 200 and i.pos[1] >= 200 and i.pos[1] <= 400:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 4)
+                        main_display.blit(draw_x, square4)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 4)
+                        main_display.blit(draw_o, square4)
+                        display.update()
                 elif i.pos[0] >= 200 and i.pos[0] <= 400 and i.pos[1] >= 200 and i.pos[1] <= 400:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 5)
+                        main_display.blit(draw_x, square5)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 5)
+                        main_display.blit(draw_o, square5)
+                        display.update()
                 elif i.pos[0] >= 400 and i.pos[0] <= 600 and i.pos[1] >= 200 and i.pos[1] <= 400:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 6)
+                        main_display.blit(draw_x, square6)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 6)
+                        main_display.blit(draw_o, square6)
+                        display.update()
                 elif i.pos[0] >= 0 and i.pos[0] <= 200 and i.pos[1] >= 400 and i.pos[1] <= 600:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 7)
+                        main_display.blit(draw_x, square7)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 7)
+                        main_display.blit(draw_o, square7)
+                        display.update()
                 elif i.pos[0] >= 200 and i.pos[0] <= 400 and i.pos[1] >= 400 and i.pos[1] <= 600:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 8)
+                        main_display.blit(draw_x, square8)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 8)
+                        main_display.blit(draw_o, square8)
+                        display.update()
                 elif i.pos[0] >= 400 and i.pos[0] <= 600 and i.pos[1] >= 400 and i.pos[1] <= 600:
                     if queue == 'x':
                         queue = 'y'
-                        drawX(main_display, 9)
+                        main_display.blit(draw_x, square9)
+                        display.update()
                     else:
                         queue = 'x'
-                        drawY(main_display, 9)
+                        main_display.blit(draw_o, square9)
+                        display.update()
  
 if __name__ == "__main__":
     main()
